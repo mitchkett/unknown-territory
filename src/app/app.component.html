@@ -1,7 +1,10 @@
-<h1>{{ title }}</h1>
+<div fxLayout="row" fxLayoutAlign="space-between">
+  <h1>{{ title }}</h1>
+</div>
+<div fxLayout="row">
+  <agm-map [latitude]="lat" [longitude]="lng" [zoom]="13" [zoomControl]="true" fxFlex>
+  </agm-map>
+  <div fxFlex="20" class="sidebar">
 
-<!-- this creates a google map on the page with the given lat/lng from -->
-<!-- the component as the initial center of the map: -->
-<agm-map [latitude]="lat" [longitude]="lng">
-  <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-</agm-map>
+  </div>
+</div>
