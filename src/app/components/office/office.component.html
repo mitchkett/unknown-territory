@@ -1,0 +1,4 @@
+<h2>{{ office.name }}</h2>
+<div fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap="2em">
+	<app-official *ngFor="let official of getOfficialsForOffice()" [official]="official" fxFlex="200px"></app-official>
+</div>
