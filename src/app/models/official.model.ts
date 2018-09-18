@@ -6,6 +6,7 @@ export class Official {
 	address: Address[];
 	party: string;
 	phones: string[];
+	emails: string[];
 	urls: string[];
 	photoUrl: string;
 	channels: Channel[];

@@ -1,0 +1,12 @@
+<a *ngIf="channel.type === 'Facebook'" href="https://www.facebook.com/{{channel.id}}" target="blank">
+	<fa-icon [icon]="facebookIcon"></fa-icon>
+</a>
+<a *ngIf="channel.type === 'GooglePlus'" href="https://plus.google.com/{{channel.id}}" target="blank">
+	<fa-icon [icon]="googlePlusIcon"></fa-icon>
+</a>
+<a *ngIf="channel.type === 'Twitter'" href="https://www.twitter.com/{{channel.id}}" target="blank">
+	<fa-icon [icon]="twitterIcon"></fa-icon>
+</a>
+<a *ngIf="channel.type === 'YouTube'" href="https://www.youtube.com/{{channel.id}}" target="blank">
+	<fa-icon [icon]="youTubeIcon"></fa-icon>
+</a>

@@ -2,9 +2,13 @@
   <img *ngIf="official.photoUrl" [src]="official.photoUrl">
   <img *ngIf="!official.photoUrl" src="/assets/profile-icon.png">
   <h4>{{ official.name }}</h4>
-  <div fxLayout="row" fxLayoutAlign="center">
+  <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="1em">
     <a *ngIf="official.phones" href="tel://{{official.phones[0]}}">
-	  <mat-icon>phone</mat-icon>
-	</a>
+      <mat-icon>phone</mat-icon>
+    </a>
+    <a *ngIf="official.emails" href="mailto://{{official.emails[0]}}">
+      <mat-icon>email</mat-icon>
+    </a>
+    <app-channel-link *ngFor="let channel of official.channels" [channel]="channel"></app-channel-link>
   </div>
 </div>
