@@ -14,9 +14,12 @@ import { DivisionMap } from './models/division-map.model';
 })
 export class AppComponent {
 	title = 'Uknown Territory';
+	showError = false;
+
 	divisions: DivisionMap;
 	offices: Office[];
 	officials: Official[];
+
 	searchForm: FormGroup;
 
 	get addressField() { return this.searchForm.get('address'); }
@@ -32,10 +35,16 @@ export class AppComponent {
 	}
 
 	search() {
+		this.showError = false;
 		this.representativeService.getByAddress(this.addressField.value).subscribe((res: RepresentativeInfoResponse) => {
 			this.divisions = res.divisions;
 			this.offices = res.offices;
 			this.officials = res.officials;
+		}, error => {
+			this.divisions = null;
+			this.offices = null;
+			this.officials = null;
+			this.showError = true;
 		});
 
 		this.searchForm.markAsPristine();

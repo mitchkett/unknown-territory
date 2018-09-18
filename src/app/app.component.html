@@ -26,6 +26,7 @@
     </mat-card>
     <mat-card *ngIf="!offices">
       <mat-card-content>
+        <p *ngIf="showError">Uh oh! We couldn't find any results with address you provided.</p>
         <p>Enter an address in the form above and find out the elected representatives for that address.</p>
       </mat-card-content>
     </mat-card>
