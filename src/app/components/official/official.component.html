@@ -1,2 +1,10 @@
-<img [src]="official.photoUrl">
-<h4>{{ official.name }}</h4>
+<div class="official">
+  <img *ngIf="official.photoUrl" [src]="official.photoUrl">
+  <img *ngIf="!official.photoUrl" src="/assets/profile-icon.png">
+  <h4>{{ official.name }}</h4>
+  <div fxLayout="row" fxLayoutAlign="center">
+    <a *ngIf="official.phones" href="tel://{{official.phones[0]}}">
+	  <mat-icon>phone</mat-icon>
+	</a>
+  </div>
+</div>

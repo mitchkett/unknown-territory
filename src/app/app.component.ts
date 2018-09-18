@@ -13,7 +13,7 @@ import { DivisionMap } from './models/division-map.model';
 	styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-	title = 'Find My Representatives';
+	title = 'Uknown Territory';
 	divisions: DivisionMap;
 	offices: Office[];
 	officials: Official[];
@@ -25,6 +25,10 @@ export class AppComponent {
 		this.searchForm = this.fb.group({
 			address: ['', Validators.required]
 		});
+	}
+
+	clearSearch() {
+		this.searchForm.reset();
 	}
 
 	search() {

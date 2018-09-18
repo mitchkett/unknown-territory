@@ -5,19 +5,21 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { AgmCoreModule } from '@agm/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatInputModule, MatFormFieldModule, MatButtonModule } from '@angular/material';
+import { MatInputModule, MatFormFieldModule, MatButtonModule, MatToolbarModule, MatIconModule, MatCardModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RepresentativesService } from './services/representatives.service';
 import { OfficeComponent } from './components/office/office.component';
 import { OfficialComponent } from './components/official/official.component';
+import { ChannelLinkComponent } from './components/channel-link/channel-link.component';
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		OfficeComponent,
-		OfficialComponent
+		OfficialComponent,
+		ChannelLinkComponent
 	],
 	imports: [
 		BrowserModule,
@@ -28,6 +30,9 @@ import { OfficialComponent } from './components/official/official.component';
 		MatInputModule,
 		MatFormFieldModule,
 		MatButtonModule,
+		MatToolbarModule,
+		MatIconModule,
+		MatCardModule,
 		AgmCoreModule.forRoot({
 			apiKey: 'AIzaSyA_R63kyjU_cCRxVOKpqKNG3qfys10LsvY'
 		})

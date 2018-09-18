@@ -1,4 +1,8 @@
-<h2>{{ office.name }}</h2>
-<div fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap="2em">
-	<app-official *ngFor="let official of getOfficialsForOffice()" [official]="official" fxFlex="200px"></app-official>
-</div>
+<mat-card>
+	<mat-card-content>
+		<h2>{{ office.name }}</h2>
+		<div fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap="1em">
+			<app-official *ngFor="let official of getOfficialsForOffice()" [official]="official" fxFlex="40"></app-official>
+		</div>
+	</mat-card-content>
+</mat-card>
