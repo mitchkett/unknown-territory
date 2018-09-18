@@ -15,6 +15,9 @@ import { DivisionMap } from './models/division-map.model';
 export class AppComponent {
 	title = 'Uknown Territory';
 	showError = false;
+	lat = 38.0301788;
+	lng = -98.2305004;
+	zoom = 4.69;
 
 	divisions: DivisionMap;
 	offices: Office[];
