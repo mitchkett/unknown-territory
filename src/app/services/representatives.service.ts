@@ -10,13 +10,20 @@ import { RepresentativeInfoResponse } from '../models/representative-info-respon
 })
 export class RepresentativesService {
 
-	private baseUrl: string = 'https://www.googleapis.com/civicinfo/v2/representatives';
+	private baseUrl = 'https://www.googleapis.com/civicinfo/v2/representatives';
 
 	constructor(private http: HttpClient) { }
 
 	getByAddress(address: string): Observable<RepresentativeInfoResponse> {
-		let searchParams: HttpParams = new HttpParams().append('key', environment.googleCivicApiKey).append('address', address);
+		const searchParams: HttpParams = new HttpParams().append('key', environment.googleCivicApiKey).append('address', address);
 
 		return this.http.get<RepresentativeInfoResponse>(this.baseUrl, { params: searchParams });
+	}
+
+	getByState(state: string): Observable<RepresentativeInfoResponse> {
+		const searchParams: HttpParams = new HttpParams().append('key', environment.googleCivicApiKey);
+		const stateDivision = encodeURIComponent(`ocd-division/country:us/state:${state.toLowerCase()}`);
+
+		return this.http.get<RepresentativeInfoResponse>(`${this.baseUrl}/${stateDivision}`, { params: searchParams });
 	}
 }

@@ -1,33 +1,61 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between center">
   <span>{{ title }}</span>
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <span>
+      {{ selectedResultSet }}
+    </span>
+    <mat-menu #appMenu="matMenu">
+      <button mat-menu-item *ngFor="let resultSet of resultSets; let setIndex = index" (click)="selectResultSet(setIndex)">Elected
+        Officials</button>
+    </mat-menu>
+    <button mat-icon-button [matMenuTriggerFor]="appMenu">
+      <mat-icon>filter_list</mat-icon>
+    </button>
+  </div>
 </mat-toolbar>
 <div fxLayout="row" fxLayoutAlign="start start">
   <div fxFlex class="map-container">
-    <mat-card fxLayout="column">
+    <mat-card>
       <mat-card-content>
-        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom"></agm-map>
+        <form [formGroup]="searchForm" (submit)="search()" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px"
+          fxFlex>
+          <mat-form-field appearance="standard" fxFlex>
+            <mat-label>Type in a location and hit Enter</mat-label>
+            <input matInput type="text" formControlName="address" placeholder="Street address, city, state, or zip code">
+            <mat-icon matSuffix *ngIf="addressField.value" (click)="addressField.reset()" class="clear">cancel</mat-icon>
+            <mat-error *ngIf="addressField.hasError('required')">You must provide a valid address to search on</mat-error>
+          </mat-form-field>
+          <span fxLayoutAlign="center center" fxFlex="5">
+            Or
+          </span>
+          <mat-form-field fxFlex="35" appearance="standard">
+            <mat-label>Select a territory type</mat-label>
+            <mat-select formControlName="layer">
+              <mat-option *ngFor="let mapLayer of mapLayerTypes; let typeIndex = index" [value]="typeIndex">{{ mapLayer }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </form>
+      </mat-card-content>
+    </mat-card>
+    <mat-card>
+      <mat-card-content>
+        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
+            <agm-data-layer *ngIf="mapLayer" [geoJson]="mapLayer" (layerClick)="selectLayer($event)"></agm-data-layer>
+        </agm-map>
       </mat-card-content>
     </mat-card>
   </div>
   <div fxFlex="30" fxLayout="column" fxLayoutAlign="space-around" class="side-panel">
-    <mat-card class="search-box">
-      <mat-card-content>
-        <form [formGroup]="searchForm" (submit)="search()" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px"
-      fxFlex>
-          <mat-form-field appearance="standard" fxFlex="70">
-            <mat-label>Street Address</mat-label>
-            <input matInput type="text" formControlName="address" placeholder="Street, City, State" required>
-            <mat-icon matSuffix *ngIf="addressField.value" (click)="clearSearch()" class="clear">cancel</mat-icon>
-            <mat-error *ngIf="addressField.hasError('required')">You must provide a valid address to search on</mat-error>
-          </mat-form-field>
-          <button mat-flat-button color="accent" type="submit" [disabled]="searchForm.pristine || searchForm.invalid">Search</button>
-        </form>
-      </mat-card-content>
-    </mat-card>
     <mat-card *ngIf="!offices">
       <mat-card-content>
         <p *ngIf="showError">Uh oh! We couldn't find any results with address you provided.</p>
         <p>Enter an address in the form above and find out the elected representatives for that address.</p>
+      </mat-card-content>
+    </mat-card>
+    <mat-card *ngIf="offices" class="result-header">
+      <mat-card-content>
+          <h2>Elected Officials for</h2>
+          <h3>{{ searchTerritory }}</h3>
       </mat-card-content>
     </mat-card>
     <app-office *ngFor="let office of offices" [office]="office" [officials]="officials"></app-office>
