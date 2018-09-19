@@ -6,7 +6,7 @@
     <a *ngIf="official.phones" href="tel://{{official.phones[0]}}">
       <mat-icon>phone</mat-icon>
     </a>
-    <a *ngIf="official.emails" href="mailto://{{official.emails[0]}}">
+    <a *ngIf="official.emails" href="mailto:{{official.emails[0]}}">
       <mat-icon>email</mat-icon>
     </a>
     <app-channel-link *ngFor="let channel of official.channels" [channel]="channel"></app-channel-link>
