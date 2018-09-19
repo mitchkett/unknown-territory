@@ -1,5 +1,13 @@
+@import '../styles/styles';
+
 .map-container, .side-panel {
   padding: 1em;
+}
+
+.result-header {
+  background-color: $accent;
+  color: #fff;
+  text-align: center;
 }
 
 agm-map {

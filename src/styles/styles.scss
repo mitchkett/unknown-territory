@@ -1,5 +1,5 @@
 @import '~@angular/material/theming';
-@import './variables.scss';
+@import './variables';
 
 $general-typography: mat-typography-config( $font-family: $font-stack);
 
@@ -12,6 +12,10 @@ $demo-app-warn : mat-palette($mat-deep-orange);
 $demo-app-theme: mat-light-theme($demo-app-primary, $demo-app-accent, $demo-app-warn);
 
 @include angular-material-theme($demo-app-theme);
+
+$primary: mat-color($demo-app-primary);
+$accent: mat-color($demo-app-accent);
+$warn: mat-color($demo-app-warn);
 
 html, body { height: 100%; }
 body { margin: 0; }
