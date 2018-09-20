@@ -23,7 +23,7 @@
             <mat-label>Type in a location and hit Enter</mat-label>
             <input matInput type="text" formControlName="address" placeholder="Street address, city, state, or zip code">
             <mat-icon matSuffix *ngIf="addressField.value" (click)="addressField.reset()" class="clear">cancel</mat-icon>
-            <mat-error *ngIf="addressField.hasError('required')">You must provide a valid address to search on</mat-error>
+            <mat-error *ngIf="addressField.hasError('invalid')">{{ addressField.errors['invalid'] }}</mat-error>
           </mat-form-field>
           <span fxLayoutAlign="center center" fxFlex="5">
             Or
@@ -33,6 +33,7 @@
             <mat-select formControlName="layer">
               <mat-option *ngFor="let mapLayer of mapLayerTypes; let typeIndex = index" [value]="typeIndex">{{ mapLayer }}</mat-option>
             </mat-select>
+            <mat-hint>Select a type and click on a region displayed on the map</mat-hint>
           </mat-form-field>
         </form>
       </mat-card-content>
@@ -50,8 +51,7 @@
   <div fxFlex="30" fxLayout="column" fxLayoutAlign="space-around" class="side-panel">
     <mat-card *ngIf="!offices">
       <mat-card-content>
-        <p *ngIf="showError">Uh oh! We couldn't find any results with address you provided.</p>
-        <p>Enter an address in the form above and find out the elected representatives for that address.</p>
+        <p>Welcome to Unknown Territory!<br><br>Enter an address or explore the map to discover information related to territories around the country.</p>
       </mat-card-content>
     </mat-card>
     <mat-card *ngIf="offices" class="result-header">

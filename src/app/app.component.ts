@@ -7,6 +7,7 @@ import { RepresentativeInfoResponse } from './models/representative-info-respons
 import { Official } from './models/official.model';
 import { DivisionMap } from './models/division-map.model';
 import { TerritoriesService } from './services/territories.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
 	selector: 'app-root',
@@ -15,7 +16,6 @@ import { TerritoriesService } from './services/territories.service';
 })
 export class AppComponent {
 	title = 'Uknown Territory';
-	showError = false;
 	lat = 38.0301788;
 	lng = -98.2305004;
 	zoom = 4.69;
@@ -59,16 +59,20 @@ export class AppComponent {
 	}
 
 	search() {
-		this.showError = false;
+		this.addressField.setErrors(null);
 		this.searchTerritory = this.addressField.value;
 		this.representativeService.getByAddress(this.addressField.value).subscribe(
-			(res: RepresentativeInfoResponse) => this.bindResults(res),
+			(res: RepresentativeInfoResponse) => {
+				this.selectedMapLayerShapes = [];
+				this.bindResults(res);
+			},
 			error => this.handleError(error));
 
 		this.searchForm.markAsPristine();
 	}
 
 	selectLayer(layerInfo) {
+		this.addressField.reset();
 		const shapes: any[] = layerInfo.feature.b.b;
 		this.selectedMapLayerShapes = [];
 		shapes.forEach(shape => {
@@ -88,12 +92,9 @@ export class AppComponent {
 		this.officials = res.officials;
 	}
 
-	handleError(error) {
+	handleError(error: HttpErrorResponse) {
 		console.log(error);
-		this.divisions = null;
-		this.offices = null;
-		this.officials = null;
-		this.showError = true;
+		this.addressField.setErrors({ invalid: error.error.error.message });
 	}
 
 	selectMapLayerType() {
