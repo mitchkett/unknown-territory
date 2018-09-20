@@ -11,6 +11,7 @@ import {
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { AppComponent } from './app.component';
+import { environment } from '../environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RepresentativesService } from './services/representatives.service';
 import { OfficeComponent } from './components/office/office.component';
@@ -41,7 +42,7 @@ import { TerritoriesService } from './services/territories.service';
 		MatMenuModule,
 		FontAwesomeModule,
 		AgmCoreModule.forRoot({
-			apiKey: 'AIzaSyA_R63kyjU_cCRxVOKpqKNG3qfys10LsvY'
+			apiKey: environment.googleMapsApiKey
 		})
 	],
 	providers: [DataLayerManager, GoogleMapsAPIWrapper, RepresentativesService, TerritoriesService],
