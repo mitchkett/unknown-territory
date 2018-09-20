@@ -22,6 +22,7 @@ export class AppComponent {
 
 	mapLayerTypes = ['Congressional Districts', 'Counties', 'States'];
 	mapLayer = null;
+	selectedMapLayerShapes = [];
 
 	resultSets = ['Elected Officials'];
 	selectedResultSet = this.resultSets[0];
@@ -68,6 +69,12 @@ export class AppComponent {
 	}
 
 	selectLayer(layerInfo) {
+		const shapes: any[] = layerInfo.feature.b.b;
+		this.selectedMapLayerShapes = [];
+		shapes.forEach(shape => {
+			this.selectedMapLayerShapes.push(shape.b[0].b);
+		});
+
 		const stateAbbreviation: string = layerInfo.feature.f.STUSPS;
 		this.searchTerritory = layerInfo.feature.f.NAME;
 		this.representativeService.getByState(stateAbbreviation).subscribe(
