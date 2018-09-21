@@ -15,7 +15,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 	styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-	title = 'Uknown Territory';
+	title = 'Unknown Territory';
 	lat = 38.0301788;
 	lng = -98.2305004;
 	zoom = 4.69;
