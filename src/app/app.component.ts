@@ -20,7 +20,7 @@ export class AppComponent {
 	lng = -98.2305004;
 	zoom = 4.69;
 
-	mapLayerTypes = ['Congressional Districts', 'Counties', 'States'];
+	mapLayerTypes = ['States'];
 	mapLayer = null;
 	selectedMapLayerShapes = [];
 
@@ -45,7 +45,7 @@ export class AppComponent {
 		});
 
 		this.layerField.valueChanges.subscribe(selectedLayer => {
-			if (selectedLayer) {
+			if (selectedLayer !== null) {
 				this.selectMapLayerType();
 			}
 		});
