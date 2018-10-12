@@ -20,6 +20,6 @@ export class OfficeComponent implements OnInit {
 	}
 
 	getOfficialsForOffice() {
-		return this.office.officialIndices.map(i => this.officials[i]);
+		return this.office.officialIndices.filter(i => this.officials[i]).map(i => this.officials[i]);
 	}
 }
