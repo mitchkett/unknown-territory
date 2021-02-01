@@ -73,14 +73,14 @@ export class AppComponent {
 
 	selectLayer(layerInfo) {
 		this.addressField.reset();
-		const shapes: any[] = layerInfo.feature.b.b;
+		const shapes: any[] = layerInfo.feature.i.i;
 		this.selectedMapLayerShapes = [];
 		shapes.forEach(shape => {
-			this.selectedMapLayerShapes.push(shape.b[0].b);
+			this.selectedMapLayerShapes.push(shape.i[0].i);
 		});
 
-		const stateAbbreviation: string = layerInfo.feature.f.STUSPS;
-		this.searchTerritory = layerInfo.feature.f.NAME;
+		const stateAbbreviation: string = layerInfo.feature.j.STUSPS;
+		this.searchTerritory = layerInfo.feature.j.NAME;
 		this.representativeService.getByState(stateAbbreviation).subscribe(
 			(res: RepresentativeInfoResponse) => this.bindResults(res),
 			error => this.handleError(error));
